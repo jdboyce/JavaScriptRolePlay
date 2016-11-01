@@ -43,6 +43,18 @@ var canvas = document.getElementById("canvas"),
                 grounded: false
             },
 
+    zom = {
+        x: 110, //h
+        y: 250, //v
+        width: 10,
+        height: 10,
+        zomspeed: 3,
+        zomvelX: 0,
+        zomvelY: 0,
+        zomjumping: false,
+        zomgrounded: false
+      },
+
     keys = [],
 
     
@@ -52,7 +64,10 @@ var canvas = document.getElementById("canvas"),
 
 
 
-var zombies = [];
+
+  
+
+// var zombies = [];
 
 var boxes = [];
 
@@ -164,41 +179,47 @@ boxes.push({ // top
 
 
 
-zombies.push({   // bottom box
-    x: 110, //h
-    y: 250, //v
-    width: 10,
-    height: 10
-});
 
-zombies.push({   // middle box
-    x: 180,
-    y: 295,
-    width: 10,
-    height: 10
-});
+ 
+// ZOMBIE DEMENSIONS
+
+//***************************************************************************
 
 
 
-create();
-
-function create()
-{
-    // alert("test");
-    ctx.beginPath(); 
-        ctx.fillStyle = "black";
-        ctx.fillRect(10,10,100,100);
-
-        // alert("hi");
-//         ctx.beginPath();
-// ctx.strokeStyle = "black";  // Purple path
-// ctx.moveTo(50, 0);
-// ctx.lineTo(150, 130);
-// ctx.stroke();  // Draw it
 
 
 
-};
+
+
+
+// zombies.push({   // bottom box
+//     x: 110, //h
+//     y: 250, //v
+//     width: 10,
+//     height: 10
+//     // speed: 3,
+//     // velX: 0,
+//     // velY: 0,
+//     // grounded: false
+
+
+
+// });
+
+// zombies.push({   // middle box
+//     x: 180,
+//     y: 295,
+//     width: 10,
+//     height: 10
+//     // speed: 3,
+//     // velX: 0,
+//     // velY: 0,
+//     // grounded: false
+// });
+
+
+
 
 
 
@@ -211,111 +232,52 @@ canvas.height = height;
 
 
 function update()
+
         {
-        // check keys
+
+ // CHECK KEYS PRESSED
+
+//***************************************************************************
+        
+
+        // up arrow or space
         if (keys[38] || keys[32] || keys[87]) {
-            // up arrow or space
+            
             if (!player.jumping && player.grounded) {
                 player.jumping = true;
                 player.grounded = false;
-                player.velY = -player.speed * 2;
+                player.velY = -player.speed * 2.5;
             }
         }
+
+          // right arrow
         if (keys[39] || keys[68]) {
-            // right arrow
+          
             if (player.velX < player.speed) {
                 player.velX++;
             }
         }
+
+
+        // left arrow
         if (keys[37] || keys[65]) {
-            // left arrow
+            
             if (player.velX > -player.speed) {
                 player.velX--;
             }
         }
 
+        player.velX *= friction;
+        player.velY += gravity;
 
 
 
-    player.velX *= friction;
-    player.velY += gravity;
+        // player.grounded = false;
 
 
 
-
-    ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = "gray";
-    ctx.beginPath();
-    
-
-
-
-    player.grounded = false;
-
-
-
-    for (var i = 0; i < boxes.length; i++) {
-        ctx.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+//***************************************************************************
         
-        var dir = colCheck(player, boxes[i]);
-
-        if (dir === "l" || dir === "r") {
-            player.velX = 0;
-            player.jumping = false;
-        } else if (dir === "b") {
-            player.grounded = true;
-            player.jumping = false;
-        } else if (dir === "t") {
-            player.velY *= -1;
-        }
-
-    }
-
-
-
-// for (var i = 0; i < zobies.length; i++) 
-//     {
-
-//     ctx.beginPath();
-// ctx.lineWidth = "5";
-// ctx.strokeStyle = "green";  // Green path
-// ctx.moveTo(0, 75);
-// ctx.lineTo(250, 75);
-// ctx.stroke();  // Draw it
-
-
-// ctx.beginPath();
-// ctx.strokeStyle = "purple";  // Purple path
-// ctx.moveTo(50, 0);
-// ctx.lineTo(150, 130);
-// ctx.stroke();  // Draw it
-// }
-
-
-
-
-    
-// ctx.beginPath();
-//     // ctx.clearRect(0, 0, width, height);
-//     ctx.fillStyle = "black";
-//     // 
-
-//     for (var i = 0; i < zombies.length; i++) 
-//     {
-
-//         ctx.rect(zombies[i].x, zombies[i].y, zombies[i].width, zombies[i].height);
-//         var dir = colCheck(player, boxes[i]);
-
-//         if (dir === "l" || dir === "r") {
-//             player.velX = 0;
-//             player.jumping = false;
-//         } else if (dir === "b") {
-//             player.grounded = true;
-//             player.jumping = false;
-//         } else if (dir === "t") {
-//             player.velY *= -1;
-//         }
-//     }
 
 
 
@@ -323,16 +285,50 @@ function update()
 
 
 
-    if(player.grounded){
-         player.velY = 0;
-    }
-    
 
 
 
 
-    player.x += player.velX;
-    player.y += player.velY;
+
+
+
+
+ // BOXES / PLATFORMS
+
+//***************************************************************************
+        
+
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = "gray";
+        ctx.beginPath();
+
+
+
+        for (var i = 0; i < boxes.length; i++)
+            {
+                ctx.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+                
+                var dir = colCheck(player, boxes[i]);
+
+                if (dir === "l" || dir === "r")
+                    {
+                        player.velX = 0;
+                        player.jumping = false;
+                    }
+
+                else if (dir === "b")
+                    {
+                    player.grounded = true;
+                    player.jumping = false;
+                    }
+
+                else if (dir === "t")
+                    {
+                        player.velY *= -1;
+                    }
+
+                }
+
 
 
 
@@ -344,24 +340,112 @@ function update()
 
 //*************************************************************************
 
-// Player Attributes
-
-    ctx.fill();
-    ctx.fillStyle = "green";
-    ctx.fillRect(player.x, player.y, player.width, player.height);
 
 
 
 
-for (var i = 0; i < zombies.length; i++) 
-{
 
 
-   ctx.fillStyle = "black";
-ctx.fillRect(zombies[i].x, zombies[i].y, zombies[i].width, zombies[i].height);
-};
 
 
+// PLAYER ATTRIBUTES
+
+//*************************************************************************
+
+
+
+        if(player.grounded)
+        {
+            player.velY = 0;
+        }
+    
+        player.x += player.velX;
+        player.y += player.velY;
+
+        ctx.fill();
+        ctx.fillStyle = "green";
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+
+
+
+//*************************************************************************
+
+
+
+
+
+
+
+
+
+// ZOMBIES
+
+//*************************************************************************
+
+      //   zom = {
+      //   x: 110, //h
+      //   y: 250, //v
+      //   width: 10,
+      //   height: 10
+      //   speed: 3,
+      //   velX: 0,
+      //   velY: 0,
+      //   jumping: false,
+      //   grounded: false
+      // };
+
+
+
+        ctx.fillStyle = "red";
+        ctx.fillRect(zom.x, zom.y, zom.width, zom.height);
+
+        zom.zomgrounded = false;
+
+    for (var i = 0; i < boxes.length; i++)
+            {
+                ctx.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+                
+                var dir = colCheck(zom, boxes[i]);
+
+                if (dir === "l" || dir === "r")
+                    {
+                        zom.zomvelX = 0;
+                        zom.zomjumping = false;
+                    }
+
+                else if (dir === "b")
+                    {
+                    zom.zomgrounded = true;
+                    zom.zomjumping = false;
+                    }
+
+                else if (dir === "t")
+                    {
+                        zom.zomvelY *= -1;
+                    }
+
+
+
+
+            }
+
+
+        if(zom.zomgrounded)
+        {
+            zom.zomvelY = 0;
+        }
+    
+        zom.x += zom.zomvelX;
+        zom.y += zom.zomvelY;
+
+
+        // for (var i = 0; i < zombies.length; i++) 
+        // {
+        // ctx.fillStyle = "black";
+        // ctx.fillRect(zombies[i].x, zombies[i].y, zombies[i].width, zombies[i].height);
+        // // player.velX *= friction;
+        // // player.velY += gravity;
+        // };
 
 
 
@@ -375,6 +459,16 @@ ctx.fillRect(zombies[i].x, zombies[i].y, zombies[i].width, zombies[i].height);
 
     requestAnimationFrame(update);
 }
+
+
+
+
+
+
+
+
+
+
 
 function colCheck(shapeA, shapeB) {
 
@@ -395,7 +489,7 @@ function colCheck(shapeA, shapeB) {
 
 
 
-    // if the x and y vector are less than the half width or half height, they we must be inside the object, causing a collision
+    // if the x and y vector are less than the half width or half height, then we must be inside the object, causing a collision
 
     if (Math.abs(vX) < hWidths && Math.abs(vY) < hHeights) 
 
@@ -403,7 +497,9 @@ function colCheck(shapeA, shapeB) {
         // figures out on which side we are colliding (top, bottom, left, or right)
         var oX = hWidths - Math.abs(vX),
             oY = hHeights - Math.abs(vY);
-        if (oX >= oY) {
+
+        if (oX >= oY)
+        {
             if (vY > 0) {
                 colDir = "t";
                 shapeA.y += oY;
@@ -411,18 +507,25 @@ function colCheck(shapeA, shapeB) {
                 colDir = "b";
                 shapeA.y -= oY;
             }
-        } else {
-            if (vX > 0) {
+        } 
+
+        else {
+            if (vX > 0) 
+            {
                 colDir = "l";
                 shapeA.x += oX;
-            } else {
+            }
+            else
+            {
                 colDir = "r";
                 shapeA.x -= oX;
             }
         }
     }
-    return colDir;s
+    return colDir;//s
 }
+
+
 
 document.body.addEventListener("keydown", function (e) {
     keys[e.keyCode] = true;
