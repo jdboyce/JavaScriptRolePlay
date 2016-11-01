@@ -166,7 +166,7 @@ function colCheck(shapeA, shapeB) {
             }
         }
     }
-    return colDir;
+    return colDir;s
 }
 
 document.body.addEventListener("keydown", function (e) {
