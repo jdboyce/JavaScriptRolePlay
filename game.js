@@ -31,7 +31,7 @@ var canvas = document.getElementById("canvas"),
     width = 1000,
     height = 500,
     player = {
-                x: width / 2,
+                x: width - 983,
                 y: height - 15,
                 width: 5,
                 height: 5,
@@ -43,8 +43,15 @@ var canvas = document.getElementById("canvas"),
             },
 
     keys = [],
+
+    
+
     friction = 0.8,
     gravity = 0.3;
+
+
+
+var zombies = [];
 
 var boxes = [];
 
@@ -115,32 +122,32 @@ boxes.push({
 //**************************
 //PLATFORMS
 
-boxes.push({
+boxes.push({   // bottom box
     x: 30, //h
     y: 450, //v
     width: 300,
+    height: 50
+});
+
+boxes.push({   // middle box
+    x: 370,
+    y: 400,
+    width: 400,
     height: 10
 });
 
-boxes.push({
-    x: 170,
-    y: 50,
-    width: 80,
-    height: 80
+boxes.push({ // top middle
+    x: 90,
+    y: 350,
+    width: 250,
+    height: 10
 });
 
-boxes.push({
-    x: 220,
-    y: 100,
-    width: 80,
-    height: 80
-});
-
-boxes.push({
-    x: 270,
-    y: 150,
-    width: 40,
-    height: 40
+boxes.push({ // top
+    x: 400,
+    y: 300,
+    width: 400,
+    height: 20
 });
 
 
@@ -155,37 +162,48 @@ boxes.push({
 canvas.width = width;
 canvas.height = height;
 
-function update() {
-    // check keys
-    if (keys[38] || keys[32] || keys[87]) {
-        // up arrow or space
-        if (!player.jumping && player.grounded) {
-            player.jumping = true;
-            player.grounded = false;
-            player.velY = -player.speed * 2;
+
+
+
+function update()
+        {
+        // check keys
+        if (keys[38] || keys[32] || keys[87]) {
+            // up arrow or space
+            if (!player.jumping && player.grounded) {
+                player.jumping = true;
+                player.grounded = false;
+                player.velY = -player.speed * 2;
+            }
         }
-    }
-    if (keys[39] || keys[68]) {
-        // right arrow
-        if (player.velX < player.speed) {
-            player.velX++;
+        if (keys[39] || keys[68]) {
+            // right arrow
+            if (player.velX < player.speed) {
+                player.velX++;
+            }
         }
-    }
-    if (keys[37] || keys[65]) {
-        // left arrow
-        if (player.velX > -player.speed) {
-            player.velX--;
+        if (keys[37] || keys[65]) {
+            // left arrow
+            if (player.velX > -player.speed) {
+                player.velX--;
+            }
         }
-    }
+
+
+
 
     player.velX *= friction;
     player.velY += gravity;
 
     ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "gray";
     ctx.beginPath();
     
+
+
+
     player.grounded = false;
+
     for (var i = 0; i < boxes.length; i++) {
         ctx.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
         
@@ -212,12 +230,18 @@ function update() {
 
 
 
+
+
+
+
+
+
 //*************************************************************************
 
 // Player Attributes
 
     ctx.fill();
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "green";
     ctx.fillRect(player.x, player.y, player.width, player.height);
 
 //*************************************************************************
