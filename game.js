@@ -11,10 +11,11 @@
 
 
 
-(function () {
-    var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-    window.requestAnimationFrame = requestAnimationFrame;
-})();
+(function ()
+    {
+        var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+        window.requestAnimationFrame = requestAnimationFrame;
+    })();
 
 
 
@@ -31,8 +32,8 @@ var canvas = document.getElementById("canvas"),
     width = 1000,
     height = 500,
     player = {
-                x: width - 983,
-                y: height - 15,
+                x: width - 970,
+                y: height - 35,
                 width: 5,
                 height: 5,
                 speed: 3,
@@ -54,6 +55,8 @@ var canvas = document.getElementById("canvas"),
 var zombies = [];
 
 var boxes = [];
+
+
 
 
 //***************************************************************************
@@ -79,8 +82,8 @@ var boxes = [];
 
 boxes.push({
     x: 0,
-    y: 100,
-    width: 10,
+    y: 0,
+    width: 20,
     height: height
 });
 
@@ -94,7 +97,7 @@ boxes.push({
 
 boxes.push({
     x: 0,
-    y: height - 2,
+    y: height - 20,
     width: width,
     height: 50
 });
@@ -108,7 +111,7 @@ boxes.push({
 // RIGHT WALL
 
 boxes.push({
-    x: width - 10,
+    x: width - 20,
     y: 0,
     width: 50,
     height: height
@@ -123,30 +126,30 @@ boxes.push({
 //PLATFORMS
 
 boxes.push({   // bottom box
-    x: 30, //h
+    x: 100, //h
     y: 450, //v
     width: 300,
     height: 50
 });
 
 boxes.push({   // middle box
-    x: 370,
-    y: 400,
+    x: 380,
+    y: 395,
     width: 400,
     height: 10
 });
 
 boxes.push({ // top middle
     x: 90,
-    y: 350,
+    y: 340,
     width: 250,
     height: 10
 });
 
 boxes.push({ // top
     x: 400,
-    y: 300,
-    width: 400,
+    y: 282,
+    width: 100,
     height: 20
 });
 
@@ -154,6 +157,48 @@ boxes.push({ // top
 //***************************************************************************
 
 
+
+
+
+
+
+
+
+zombies.push({   // bottom box
+    x: 110, //h
+    y: 250, //v
+    width: 10,
+    height: 10
+});
+
+zombies.push({   // middle box
+    x: 180,
+    y: 295,
+    width: 10,
+    height: 10
+});
+
+
+
+create();
+
+function create()
+{
+    // alert("test");
+    ctx.beginPath(); 
+        ctx.fillStyle = "black";
+        ctx.fillRect(10,10,100,100);
+
+        // alert("hi");
+//         ctx.beginPath();
+// ctx.strokeStyle = "black";  // Purple path
+// ctx.moveTo(50, 0);
+// ctx.lineTo(150, 130);
+// ctx.stroke();  // Draw it
+
+
+
+};
 
 
 
@@ -195,6 +240,9 @@ function update()
     player.velX *= friction;
     player.velY += gravity;
 
+
+
+
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = "gray";
     ctx.beginPath();
@@ -203,6 +251,8 @@ function update()
 
 
     player.grounded = false;
+
+
 
     for (var i = 0; i < boxes.length; i++) {
         ctx.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
@@ -220,11 +270,67 @@ function update()
         }
 
     }
+
+
+
+// for (var i = 0; i < zobies.length; i++) 
+//     {
+
+//     ctx.beginPath();
+// ctx.lineWidth = "5";
+// ctx.strokeStyle = "green";  // Green path
+// ctx.moveTo(0, 75);
+// ctx.lineTo(250, 75);
+// ctx.stroke();  // Draw it
+
+
+// ctx.beginPath();
+// ctx.strokeStyle = "purple";  // Purple path
+// ctx.moveTo(50, 0);
+// ctx.lineTo(150, 130);
+// ctx.stroke();  // Draw it
+// }
+
+
+
+
     
+// ctx.beginPath();
+//     // ctx.clearRect(0, 0, width, height);
+//     ctx.fillStyle = "black";
+//     // 
+
+//     for (var i = 0; i < zombies.length; i++) 
+//     {
+
+//         ctx.rect(zombies[i].x, zombies[i].y, zombies[i].width, zombies[i].height);
+//         var dir = colCheck(player, boxes[i]);
+
+//         if (dir === "l" || dir === "r") {
+//             player.velX = 0;
+//             player.jumping = false;
+//         } else if (dir === "b") {
+//             player.grounded = true;
+//             player.jumping = false;
+//         } else if (dir === "t") {
+//             player.velY *= -1;
+//         }
+//     }
+
+
+
+
+
+
+
     if(player.grounded){
          player.velY = 0;
     }
     
+
+
+
+
     player.x += player.velX;
     player.y += player.velY;
 
@@ -243,6 +349,21 @@ function update()
     ctx.fill();
     ctx.fillStyle = "green";
     ctx.fillRect(player.x, player.y, player.width, player.height);
+
+
+
+
+for (var i = 0; i < zombies.length; i++) 
+{
+
+
+   ctx.fillStyle = "black";
+ctx.fillRect(zombies[i].x, zombies[i].y, zombies[i].width, zombies[i].height);
+};
+
+
+
+
 
 //*************************************************************************
 
@@ -315,3 +436,4 @@ document.body.addEventListener("keyup", function (e) {
 window.addEventListener("load", function () {
     update();
 });
+
