@@ -9,8 +9,11 @@ body {
 
 h1{
 
-color: #a81f1f;
+color: red;
 }
+
+
+/*#a81f1f*/
 
 
 img {
@@ -20,9 +23,9 @@ img {
     z-index: -1;
 }
 
-button 
+button
   {
-      background:    #666;
+    background:    #666;
     background:    -webkit-linear-gradient(#666, #000);
     background:    linear-gradient(#666, #000);
     border:        6px solid #a81f1f;
@@ -48,4 +51,14 @@ button
     padding: 13px;
     width: 200px;
     height: 100px;
+}
+
+.center {
+    position: absolute;
+    left: 0;
+    top: 72%;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: white;
 }

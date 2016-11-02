@@ -10,9 +10,16 @@
 
 	<div class = "row">
  </br></br>
+
  <center>
  <img src="dentist_damnation.png" alt="Title: Dentist Damnation">
+ <div id="textbox" class="center">Yay text and lots of text, much text and many text. Yay text and lots of text, much text and many text.</p>
  </center>
+
+
+
+
+
 </br>
   <div class="col-md-2"></div>
 	<div class="col-md-8">
@@ -40,21 +47,22 @@
     </div> -->
 
       <div class="col-md-4">
-        <button id="join">PUNCH</button>
+        <button onclick="removeElement('kick'); addElement('parent', 'button', 'kick', 'kick();', 'SUCCESS')">PUNCH</button>
+        <!-- ;  -->
       </div>
 
         <!-- <div class="col-md-1">
         </div> -->
 
         <div class="col-md-4">
-        <button>FIRE</button>
+        <button id = "fire" onclick="fire()">FIRE</button>
       </div>
 <!--
         <div class="col-md-1">
         </div> -->
 
-        <div class="col-md-4">
-        <button>KICK</button></div>
+        <div id="parent" class="col-md-4">
+        <button id="kick" onclick="kick()">KICK</button></div>
         <!-- <div class="col-md-2">
 
          <button id="rcorners1">
@@ -62,6 +70,43 @@
 
 	</div> -->
 </center>
+
+
+
+
+
+
+
+
+
+<script>
+function punch() {
+    document.getElementById("textbox").innerHTML = "THROAT PUNCH!!!";
+}
+function fire() {
+    document.getElementById("textbox").innerHTML = "FIRE GUN!!!";
+}
+function kick() {
+    document.getElementById("textbox").innerHTML = "JUMP KICK!!!";
+}
+function removeElement(elementId)
+{
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+
+function addElement(parentId, elementTag, elementId, func, html) {
+
+    var p = document.getElementById(parentId);
+    var newElement = document.createElement(elementTag);
+    newElement.setAttribute('id', elementId);
+    newElement.setAttribute('onclick', func);
+    newElement.innerHTML = html;
+    p.appendChild(newElement);
+}
+
+
+</script>
 
 
 	<div class="col-md-3"></div>
