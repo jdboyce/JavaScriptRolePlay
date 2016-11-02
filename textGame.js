@@ -14,7 +14,7 @@ function zombie(){
 
 
 
-var jake = new player();
+var user = new player();
 
 
 function calculateBattleResult(playerInput){
@@ -22,30 +22,45 @@ function calculateBattleResult(playerInput){
 	//player:1=Jump Kick,2=Shoot,3=Throat Punch
 	//zombie:1=Bite,2=Scratch,3=Pounce
 	//returns a true if the player wins returns false when the enemy wins
+
+
+
 	let computerInput=(Math.round(Math.random()*3));
+	if (computerInput != 1 && computerInput != 2 && computerInput != 3)
+	{
+		computerInput = 1;
+	}
 	let outputResult=(3+playerInput-computerInput)%3;
 	let zombieDamage=(Math.round(Math.random()*10));
+	var inputAsString = "";
+	var compInputAsString = "";
+
+	switch(computerInput){
+		case 1: compInputAsString = "bite"; break;
+		case 2: compInputAsString = "scratch"; break;
+		case 3: compInputAsString = "pounce"; break;
+		default: compInputAsString = "unknown";
+	
+	}
+
+	switch(playerInput){
+		case 1: inputAsString = "jump kick"; break;
+		case 2: inputAsString = "weapon fire"; break;
+		case 3: inputAsString = "throat punch"; break;
+		default: inputAsString = "unknown";
+	
+	}
 
 	if(outputResult===1){
-		document.getElementById("textbox").innerHTML = "You win!";
-		// return function(){
-		// 	this.gold+=15;
-			
-		// }
+
+	document.getElementById("textbox").innerHTML = "The zombie attacked with a " + compInputAsString + ", your " + inputAsString + " wins!  Player health: " + user.health;
+
 	}
 	else if (outputResult===2) {
 
-				document.getElementById("textbox").innerHTML = "You lose!";
-		// return function(){
-
-		// 	if(this.health<=zombieDamage){
-		// 		return gameOver();
-		// 	}
-		// 	else{
-		// 		this.health-=zombieDamage;
-		
-		// 	}
-		// };
+    document.getElementById("textbox").innerHTML = "The zombie attacked with a " + compInputAsString + ", your " + inputAsString + " loses!  Player health: " + user.health;
+    user.health -= 10;
+	
 	}
 	else{
 		return calculateBattleResult(playerInput)
@@ -181,7 +196,12 @@ function initGame(){
 /********************************************************************************************************/
 
 
-    function startNinjaStory(){
+    function startNinja(){
+      removeElement("startAlien");
+      removeElement("startCowboy");
+      removeElement("startNinja");
+      addElement("buttonCenter", "button", "startBattleOne", "addBatBtns('startBattleOne');", "NEXT");
+      document.getElementById("textbox").innerHTML = "This is segment one of the player story.";
 
     }
 
@@ -209,7 +229,12 @@ function initGame(){
 /********************************************************************************************************/
 
 
-    function startCowboyStory(){
+    function startCowboy(){
+     removeElement("startAlien");
+      removeElement("startCowboy");
+      removeElement("startNinja");
+      addElement("buttonCenter", "button", "startBattleOne", "addBatBtns('startBattleOne');", "NEXT");
+      document.getElementById("textbox").innerHTML = "This is segment one of the player story.";
 
     }
 
@@ -247,21 +272,21 @@ function initGame(){
 	//zombie:1=Bite,2=Scratch,3=Pounce
 	function kick() {
         // document.getElementById("textbox").innerHTML = "JUMP KICK!!!";
-        calculateBattleResult(1)
-        // calculateBattleResult.call(jake,1)
+        // calculateBattleResult(1)
+        calculateBattleResult.call(user,1)
     }
 
    
     function fire() {
         // document.getElementById("textbox").innerHTML = "FIRE WEAPON!!!";
-        var battleWithNinja=calculateBattleResult.bind(jake);
+        var battleWithNinja=calculateBattleResult.bind(user);
 		battleWithNinja(2)
     }
 
 	 function punch() {
-	        document.getElementById("textbox").innerHTML = "THROAT PUNCH!!!";    
-			let playerInputArrayThatIsLiterallyOneObject=[3]
-			calculateBattleResult.apply(jake,playerInputArrayThatIsLiterallyOneObject)
+	        // document.getElementById("textbox").innerHTML = "THROAT PUNCH!!!";    
+			let inputArray=[3]
+			calculateBattleResult.apply(user,inputArray)
 	    }
 
 
