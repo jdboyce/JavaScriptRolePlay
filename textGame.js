@@ -10,10 +10,6 @@ function zombie(){
 }
 
 
-
-
-
-
 function initGame(){
 	var user= new player.assign
 }
