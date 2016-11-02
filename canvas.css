@@ -9,16 +9,43 @@ body {
 
 h1{
 
-color: black;
+color: #a81f1f;
 }
 
 
+img {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
+
+button 
+  {
+      background:    #666;
+    background:    -webkit-linear-gradient(#666, #000);
+    background:    linear-gradient(#666, #000);
+    border:        6px solid #a81f1f;
+    border-radius: 14px;
+    color:         #fff;
+    display:       inline-block;
+    padding:       8px 20px;
+    font:          normal 700 24px/1 "Open Sans", sans-serif;
+    text-align:    center;
+    text-shadow:   none;
+  }
+
+
+
+.container {
+    position: relative;
+}
 
 
 #rcorners1 {
     border-radius: 25px;
-    background: #73AD21;
-    padding: 20px;
-    width: 100px;
-    height: 50px;
+    background: #a81f1f;
+    padding: 13px;
+    width: 200px;
+    height: 100px;
 }

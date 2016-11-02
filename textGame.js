@@ -13,8 +13,4 @@ function zombie(){
 function initGame(){
 	var user= new player.assign;
 }
-<<<<<<< HEAD
-initGame()
-=======
 initGame();
->>>>>>> 6f65a938b51bd5b0dd259a20637cfffa0cfe384c
