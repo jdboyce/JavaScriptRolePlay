@@ -5,9 +5,7 @@
    <link rel="stylesheet" type="text/css" href="canvas.css">
 </head>
 <body>
-
 	<div class = "container">
-
 	<div class = "row">
  </br></br>
 
@@ -46,23 +44,25 @@
     <!-- <div class="col-md-">
     </div> -->
 
-      <div class="col-md-4">
-        <button onclick="removeElement('kick'); addElement('parent', 'button', 'kick', 'kick();', 'SUCCESS')">PUNCH</button>
+      <div id="buttonLeft" class="col-md-4">
+        <!-- <button onclick="removeElement('kick'); addElement('parent', 'button', 'kick', 'kick();', 'SUCCESS')">PUNCH</button> -->
         <!-- ;  -->
       </div>
 
         <!-- <div class="col-md-1">
         </div> -->
 
-        <div class="col-md-4">
-        <button id = "fire" onclick="fire()">FIRE</button>
+        <div id="buttonCenter" class="col-md-4">
+        <button id = "start" onclick="start()">START</button>
+        <!-- <button id = "fire" onclick="fire()">FIRE</button> -->
       </div>
 <!--
         <div class="col-md-1">
         </div> -->
 
-        <div id="parent" class="col-md-4">
-        <button id="kick" onclick="kick()">KICK</button></div>
+        <div id="buttonRight" class="col-md-4">
+        <!-- <button id="kick" onclick="kick()">KICK</button> -->
+        </div>
         <!-- <div class="col-md-2">
 
          <button id="rcorners1">
@@ -108,10 +108,6 @@ function addElement(parentId, elementTag, elementId, func, html) {
 
 </script>
 
-
-	<div class="col-md-3"></div>
-	</div>
-</div>
     <center>
        <script src="textGame.js"></script>
 	</center>
