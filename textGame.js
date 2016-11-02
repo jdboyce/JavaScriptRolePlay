@@ -24,28 +24,23 @@ function calculateBattleResult(playerInput){
 	//returns a true if the player wins returns false when the enemy wins
 	let computerInput=(Math.round(Math.random()*3));
 	let outputResult=(3+playerInput-computerInput)%3;
-	let zombieDamage=(Math.round(Math.random()*10));
-
+	var zombieDamage=(Math.round(Math.random()*10));
 	if(outputResult===1){
-		document.getElementById("textbox").innerHTML = "You win!";
-		// return function(){
-		// 	this.gold+=15;
-			
-		// }
+		return ()=>{
+			this.gold+=15;
+			document.getElementById("textbox").innerHTML = "You win!";
+		}
 	}
 	else if (outputResult===2) {
-
-				document.getElementById("textbox").innerHTML = "You lose!";
-		// return function(){
-
-		// 	if(this.health<=zombieDamage){
-		// 		return gameOver();
-		// 	}
-		// 	else{
-		// 		this.health-=zombieDamage;
-		
-		// 	}
-		// };
+		return ()=>{
+			if(that.health<=zombieDamage){
+				return gameOver();
+			}
+			else{
+				this.health-=zombieDamage;
+		document.getElementById("textbox").innerHTML = "You lose!";
+			}
+		};
 	}
 	else{
 		return calculateBattleResult(playerInput)
@@ -131,7 +126,7 @@ function initGame(){
     }
 
 
-  
+
 
     function  addBatBtns(passedElementTag){
       removeElement(passedElementTag);
@@ -247,21 +242,24 @@ function initGame(){
 	//zombie:1=Bite,2=Scratch,3=Pounce
 	function kick() {
         // document.getElementById("textbox").innerHTML = "JUMP KICK!!!";
-        calculateBattleResult(1)
-        // calculateBattleResult.call(jake,1)
+        //var x = calculateBattleResult(1)
+        var x=calculateBattleResult.call(jake,1)
+				x()
     }
 
-   
+
     function fire() {
         // document.getElementById("textbox").innerHTML = "FIRE WEAPON!!!";
         var battleWithNinja=calculateBattleResult.bind(jake);
-		battleWithNinja(2)
+				var x=battleWithNinja(2)
+				x()
     }
 
 	 function punch() {
-	        document.getElementById("textbox").innerHTML = "THROAT PUNCH!!!";    
+	        document.getElementById("textbox").innerHTML = "THROAT PUNCH!!!";
 			let playerInputArrayThatIsLiterallyOneObject=[3]
-			calculateBattleResult.apply(jake,playerInputArrayThatIsLiterallyOneObject)
+			var x=calculateBattleResult.apply(jake,playerInputArrayThatIsLiterallyOneObject)
+			x()
 	    }
 
 
@@ -269,4 +267,3 @@ function initGame(){
 
 
 /********************************************************************************************************/
-
