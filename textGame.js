@@ -1,13 +1,15 @@
-"use strict";
+"use strict"
+
 
 
 function player(){
 	this.health=100;
 	this.gold;
 }
+
+
 function zombie(){
 };
-
 
 
 var user = new player();
@@ -25,7 +27,7 @@ function startNewHero(heroIndex){
 	heroIndex.splice(0, heroIndex);
 }
 
-
+var zombiesKilled = 0;
 
 
 function calculateBattleResult(playerInput){
@@ -62,35 +64,35 @@ function calculateBattleResult(playerInput){
 	
 	};
 
-// 	if(outputResult===1){
-
-// 	document.getElementById("textbox").innerHTML = "The zombie attacked with a " + compInputAsString + ", your " + inputAsString + " wins!  Player health: " + user.health;
-
-// 	}
-// 	else if (outputResult===2) {
-
-//     document.getElementById("textbox").innerHTML = "The zombie attacked with a " + compInputAsString + ", your " + inputAsString + " loses!  Player health: " + user.health;
-//     user.health -= 10;
+	if(outputResult===1){
+	zombiesKilled +=1;
+	document.getElementById("textbox").innerHTML = "The zombie attacked with a " + compInputAsString + ", your " + inputAsString + " wins!" + "<br>" +  "<br>" + "Player Health: " + user.health + "&nbsp" + "&nbsp" +"&nbsp" +"&nbsp" + " Zombies Killed: " + zombiesKilled;
+	}
+	else if (outputResult===2) {
+	user.health -= 10;
+    document.getElementById("textbox").innerHTML = "The zombie attacked with a " + compInputAsString + ", your " + inputAsString + " loses!" + "<br>" + "<br>" + "Player Health: "  + user.health + "&nbsp" + "&nbsp" +"&nbsp" +"&nbsp" + " Zombies Killed: " + zombiesKilled;
+  
+	}
 	
 // =======
 	// var zombieDamage=(Math.round(Math.random()*10));
-	if(outputResult===1){
-		return ()=>{
-			this.gold+=15;
-	document.getElementById("textbox").innerHTML = "The zombie attacked with a " + compInputAsString + ", your " + inputAsString + " wins!  Player health: " + user.health;
-		}
-	}
-	else if (outputResult===2) {
-		return ()=>{
-			if(that.health<=zombieDamage){
-				return gameOver();
-			}
-			else{
-				this.health-=zombieDamage;
-    document.getElementById("textbox").innerHTML = "The zombie attacked with a " + compInputAsString + ", your " + inputAsString + " loses!  Player health: " + user.health;
-			}
-		};
-	}
+	// if(outputResult===1){
+	// 	return ()=>{
+	// 		this.gold+=15;
+	// document.getElementById("textbox").innerHTML = "The zombie attacked with a " + compInputAsString + ", your " + inputAsString + " wins!  Player health: " + user.health;
+	// 	}
+	// }
+	// else if (outputResult===2) {
+	// 	return ()=>{
+	// 		if(that.health<=zombieDamage){
+	// 			return gameOver();
+	// 		}
+	// 		else{
+	// 			this.health-=zombieDamage;
+ //    document.getElementById("textbox").innerHTML = "The zombie attacked with a " + compInputAsString + ", your " + inputAsString + " loses!  Player health: " + user.health;
+	// 		}
+	// 	};
+	// }
 	else{
 		return calculateBattleResult(playerInput)
 	}
@@ -139,7 +141,7 @@ function gameOver(){
       addElement("buttonLeft", "button", "startAlien", "startAlien();", "ALIEN");
       addElement("buttonCenter", "button", "startCowboy", "startCowboy();", "COWBOY");
       addElement("buttonRight", "button", "startNinja", "startNinja();", "NINJA");
-      document.getElementById("textbox").innerHTML = "This is the second part of the background story. Now choose your player.";
+      document.getElementById("textbox").innerHTML = "This is the second part of the background story. Now choose your character!";
     };
 
 
@@ -150,9 +152,9 @@ function gameOver(){
       addElement("buttonLeft", "button", "fire", "fire();", "FIRE");
       addElement("buttonCenter", "button", "punch", "punch();", "PUNCH");
       addElement("buttonRight", "button", "kick", "kick();", "KICK");
+      document.getElementById("textbox").innerHTML = "Click FIRE to fire your weapon, PUNCH for a throat punch, and KICK for a jump kick. Good luck! ";
+
     };
-
-
 
 
 
