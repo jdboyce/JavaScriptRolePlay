@@ -3,17 +3,12 @@
 
 body {
     background-image: url("post_apocalyptic.jpg");
-    /*background-size: cover;*/
 }
 
 
 h1{
-
 color: red;
 }
-
-
-/*#a81f1f*/
 
 
 img {
@@ -22,6 +17,7 @@ img {
     top: 0px;
     z-index: -1;
 }
+
 
 button
   {

@@ -33,8 +33,8 @@ var zombiesKilled = 0;
 function calculateBattleResult(playerInput){
 
 	//player input is 1,2, or 3
-	//player:1=Jump Kick,2=Shoot,3=Throat Punch
-	//zombie:1=Bite,2=Scratch,3=Pounce
+	//player:1 = Jump Kick, 2 = Fire Weapon, 3 = Throat Punch
+	//zombie:1 = Bite, 2 = Scratch, 3 = Pounce
 	//returns a true if the player wins returns false when the enemy wins
 
 
@@ -97,14 +97,6 @@ function calculateBattleResult(playerInput){
 		return calculateBattleResult(playerInput)
 	}
 };
-
-
-
-
-function gameOver(){
-
-};
-
 
 
 
